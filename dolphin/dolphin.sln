@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dolphin", "dolphin\dolphin.vcxproj", "{3C25119D-1080-4123-9FE1-C28971A89456}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "plugFile", "..\plugs\plugFile\plugFile.vcxproj", "{CB9973CD-AA50-4646-AF12-23CE589D5673}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugs", "Plugs", "{BD38D46B-E66B-46E4-B312-8D1908315224}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3C25119D-1080-4123-9FE1-C28971A89456}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3C25119D-1080-4123-9FE1-C28971A89456}.Debug|Win32.Build.0 = Debug|Win32
+		{3C25119D-1080-4123-9FE1-C28971A89456}.Release|Win32.ActiveCfg = Release|Win32
+		{3C25119D-1080-4123-9FE1-C28971A89456}.Release|Win32.Build.0 = Release|Win32
+		{CB9973CD-AA50-4646-AF12-23CE589D5673}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CB9973CD-AA50-4646-AF12-23CE589D5673}.Debug|Win32.Build.0 = Debug|Win32
+		{CB9973CD-AA50-4646-AF12-23CE589D5673}.Release|Win32.ActiveCfg = Release|Win32
+		{CB9973CD-AA50-4646-AF12-23CE589D5673}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CB9973CD-AA50-4646-AF12-23CE589D5673} = {BD38D46B-E66B-46E4-B312-8D1908315224}
+	EndGlobalSection
+EndGlobal
