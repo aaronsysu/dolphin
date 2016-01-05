@@ -1,0 +1,8 @@
+LIBRARY
+
+EXPORTS
+
+	Decode_Open
+	Decode_Begin
+	Decode_End
+	Decode_Close

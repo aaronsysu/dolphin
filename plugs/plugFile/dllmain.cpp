@@ -1,15 +1,10 @@
 // dllmain.cpp : Defines the entry point for the DLL application.
-#include "stdafx.h"
 #pragma once
-#if (defined(_WIN32))	//windows
-#define WINAPI __stdcall
-#pragma warning(disable:4068)
-#if (defined(_USRDLL))	//DLL implement
-#define INF_API  extern "C" __declspec(dllexport)
-#else
-#define INF_API	 extern "C" __declspec(dllimport)
-#endif
-#endif
+#include "stdafx.h"
+#include "Plug.h"
+#include "MediaSession.h"
+
+#define CHECK_PARAM_AND_RETURN(x)	if (NULL == (x)) return DLPN_PLUG_PARAM_ERROR;
 
 BOOL APIENTRY DllMain( HMODULE hModule,
                        DWORD  ul_reason_for_call,
@@ -27,22 +22,36 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 	return TRUE;
 }
 
-INF_API int WINAPI MediaOpen(const char* szMediaSession)
+INF_API int WINAPI MediaOpen(const char* szParam, long long* mediaHandle)
 {
+	CHECK_PARAM_AND_RETURN(szParam);
+	MediaSession* pNewMediaSession = MediaSession::CreateMediaSession(std::string(szParam));
+	mediaHandle = (long long*)pNewMediaSession;
 	return 0;
 }
 
-INF_API int WINAPI MediaStart()
+INF_API void WINAPI MediaSetCallback(long long mediaHandle, funcRealCallBack pCallback, void* pObject)
 {
-	return 0;
+	MediaSession* pMediaSession = (MediaSession*)&mediaHandle;
+	pMediaSession->SetMediaCallback(pCallback, pObject);
 }
 
-INF_API int WINAPI MediaStop()
+INF_API int WINAPI MediaStart(long long mediaHandle)
 {
-	return 0;
+	MediaSession* pMediaSession = (MediaSession*)&mediaHandle;
+	return pMediaSession->Start();
 }
 
-INF_API int WINAPI MediaClose()
+INF_API int WINAPI MediaStop(long long mediaHandle)
 {
+	MediaSession* pMediaSession = (MediaSession*)&mediaHandle;
+	return pMediaSession->Stop();
+}
+
+INF_API int WINAPI MediaClose(long long mediaHandle)
+{
+	MediaSession* pMediaSession = (MediaSession*)&mediaHandle;
+	delete pMediaSession;
+	pMediaSession = nullptr;
 	return 0;
 }

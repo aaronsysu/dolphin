@@ -1,0 +1,8 @@
+﻿<Window x:Class="dolphin.eye.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="dolphin eye" Height="578.358" Width="874.254">
+    <Grid>
+
+    </Grid>
+</Window>
