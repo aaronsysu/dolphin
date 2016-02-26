@@ -1,9 +1,0 @@
-LIBRARY
-
-EXPORTS
-
-	MediaOpen
-	MediaSetCallback
-	MediaStart
-	MediaStop
-	MediaClose
