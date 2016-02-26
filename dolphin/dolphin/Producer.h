@@ -9,13 +9,17 @@ namespace dolphin_base
 	class Producer
 	{
 	public:
-		Producer();
+		Producer(std::string param);
 		~Producer();
+		virtual void Start();
+		virtual void Stop();
 		void AttachConsumer(ConsumerPtr consumer){
 			_consumers.push_back(consumer);
 		}
 	protected:
 		virtual void PushFrameToConsumer(dolphin_common::Frame::Ptr frame);
+	protected:
+		std::string _param;
 	private:
 		std::mutex _consumerMutex;
 		std::vector<ConsumerPtr> _consumers;

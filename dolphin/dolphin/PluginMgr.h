@@ -1,5 +1,5 @@
 #pragma once
-#include "PlugItem.h"
+#include "Plugin.h"
 #include <map>
 
 namespace dolphin_plug
@@ -11,9 +11,9 @@ namespace dolphin_plug
 		~PluginMgr();
 		void LoadPlugs();
 		void UnloadPlugs();
-		PlugItem* GetPlug(std::string tag){
-			auto it = plugItems.find(tag);
-			if (it != plugItems.end()){
+		Plugin* GetPlug(std::string tag){
+			auto it = _plugins.find(tag);
+			if (it != _plugins.end()){
 				return &it->second;
 			}
 			return nullptr;
@@ -25,7 +25,7 @@ namespace dolphin_plug
 		}
 
 	private:
-		std::map<std::string, PlugItem> plugItems;
-		std::string plugConfigFilePath;
+		std::map<std::string, Plugin> _plugins;
+		std::string _plugConfigFilePath;
 	};
 }

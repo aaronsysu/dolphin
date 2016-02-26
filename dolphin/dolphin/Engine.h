@@ -4,17 +4,10 @@
 #include <thread>
 #include <queue>
 #include <set>
-#include "Producer.h"
-#include "Consumer.h"
-
-#ifdef WIN32
-#include <WinSock2.h>
-#include <windows.h>
-#endif
 
 namespace dolphin_base
 {
-	typedef std::function <bool(void* param)> TaskHandlerFunc;
+	typedef std::function <void(void* param)> TaskHandlerFunc;
 	class TaskItem
 	{
 	public:
@@ -45,9 +38,9 @@ namespace dolphin_base
 			static Engine engine;
 			return &engine;
 		}
-		//Task
-		void PostTask(TaskHandlerFunc func);
-		void PostDelayTask(TaskHandlerFunc func, __int64 delayTime);
+		//∑¢ÀÕ»ŒŒÒ
+		void PostTask(TaskHandlerFunc func, void* param = nullptr);
+		void PostDelayTask(__int64 delayTime, TaskHandlerFunc func, void* param = nullptr);
 
 		void Start();
 		void Stop();
@@ -58,7 +51,7 @@ namespace dolphin_base
 		std::queue<std::shared_ptr<TaskItem>> _pendingTasks;
 		std::mutex _pendingTaskMutex;
 
-		std::vector<std::pair<time_t, std::shared_ptr<TaskItem>>> _pendingTimeTasks;
+		std::vector<std::pair<std::chrono::time_point<std::chrono::system_clock>, std::shared_ptr<TaskItem>>> _pendingTimeTasks;
 		std::mutex _pendingTimeTaskMutex;
 
 		std::vector<std::pair<unsigned int, std::shared_ptr<TaskItem>>> _pendingSocketTasks;

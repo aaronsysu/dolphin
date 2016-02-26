@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "Engine.h"
-#include <windows.h>
 
 namespace dolphin_base
 {
@@ -13,28 +12,28 @@ namespace dolphin_base
 
 	}
 
-	void Engine::PostTask(TaskHandlerFunc func){
+	void Engine::PostTask(TaskHandlerFunc func, void* param){
 		std::unique_lock<std::mutex> autolock(_pendingTaskMutex);
 		TaskItem taskItem;
-		taskItem.Attach(func);
+		taskItem.Attach(func, param);
 		_pendingTasks.push(std::make_shared<TaskItem>(taskItem));
 
 		_taskCv.notify_one();
 	}
 
-	void Engine::PostDelayTask(TaskHandlerFunc func, time_t delayTime){
-		typedef std::pair<time_t, std::shared_ptr<TaskItem>> taskItemType;
+	void Engine::PostDelayTask(__int64 delayTime, TaskHandlerFunc func, void* param){
+		typedef std::pair<std::chrono::time_point<std::chrono::system_clock>, std::shared_ptr<TaskItem>> taskItemType;
 		std::unique_lock<std::mutex> autolock(_pendingTimeTaskMutex);
 
 		auto nowTmpNow = std::chrono::system_clock::now();
-		time_t nowTime = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+		auto taskTime = nowTmpNow + std::chrono::milliseconds(delayTime);
 
 		TaskItem taskItem;
-		taskItem.Attach(func);
-		_pendingTimeTasks.push_back(std::make_pair(nowTime + delayTime, std::make_shared<TaskItem>(taskItem)));
+		taskItem.Attach(func, param);
+		_pendingTimeTasks.push_back(std::make_pair(taskTime, std::make_shared<TaskItem>(taskItem)));
 
 		std::sort(std::begin(_pendingTimeTasks), std::end(_pendingTimeTasks), [](taskItemType& left, taskItemType& right)->bool{
-			return left.first < right.first;
+			return left.first > right.first;
 		});
 	}
 
@@ -89,25 +88,26 @@ namespace dolphin_base
 	}
 
 	void Engine::RunDelayTask(){
-		typedef std::pair<time_t, std::shared_ptr<TaskItem>> timeTaskItemType;
+		typedef std::pair<std::chrono::time_point<std::chrono::system_clock>, std::shared_ptr<TaskItem>> timeTaskItemType;
 		timeTaskItemType task;
 		while (true){
 			std::this_thread::sleep_for(std::chrono::milliseconds(1));
 			{
 				std::unique_lock<std::mutex> autolock(_pendingTimeTaskMutex);
-				if (_pendingTimeTasks.empty())
-				{
+				if (_pendingTimeTasks.empty()){
 					continue;
 				}
 				task = _pendingTimeTasks.back();
 			}
-			auto nowTime = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-			if (task.first < nowTime)
-			{
+			auto nowTime = std::chrono::system_clock::now();
+			if (task.first < nowTime){
 				task.second->RunTask();
 
 				std::unique_lock<std::mutex> autolock(_pendingTimeTaskMutex);
 				_pendingTimeTasks.pop_back();
+			}
+			if (exitFlag){
+				break;
 			}
 		}
 	}

@@ -32,6 +32,21 @@
     <Filter Include="Codec">
       <UniqueIdentifier>{bd38146b-f29a-43fb-91b1-13363f7fa37d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Config">
+      <UniqueIdentifier>{77729166-8752-410c-8a2e-7c7fdfd9a608}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Database">
+      <UniqueIdentifier>{d1ecc76c-f208-417a-a3ed-9e2a0717014f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{23595298-517b-4665-8f08-bfaa0d83dcbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Image">
+      <UniqueIdentifier>{0137ae9f-6ae9-4afd-8072-bd9d62133aef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Event">
+      <UniqueIdentifier>{60b186b0-aa6c-4322-8dfa-33b75c36e1b4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -64,29 +79,92 @@
     <ClInclude Include="Engine.h">
       <Filter>Base</Filter>
     </ClInclude>
-    <ClInclude Include="Queue.h">
-      <Filter>Common</Filter>
-    </ClInclude>
-    <ClInclude Include="MetaDataPtr.h">
-      <Filter>Common</Filter>
-    </ClInclude>
-    <ClInclude Include="FramePtr.h">
-      <Filter>Common</Filter>
-    </ClInclude>
     <ClInclude Include="MediaSession.h">
       <Filter>Media</Filter>
     </ClInclude>
     <ClInclude Include="Archieve.h">
       <Filter>Storage</Filter>
     </ClInclude>
-    <ClInclude Include="Allocator.h">
-      <Filter>Common</Filter>
-    </ClInclude>
     <ClInclude Include="Decoder.h">
       <Filter>Codec</Filter>
     </ClInclude>
     <ClInclude Include="Encoder.h">
       <Filter>Codec</Filter>
+    </ClInclude>
+    <ClInclude Include="Database.h">
+      <Filter>Database</Filter>
+    </ClInclude>
+    <ClInclude Include="StreamProcducer.h">
+      <Filter>Media</Filter>
+    </ClInclude>
+    <ClInclude Include="Plugin.h">
+      <Filter>Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="DolphinWebService.h">
+      <Filter>Web</Filter>
+    </ClInclude>
+    <ClInclude Include="Playlist.h">
+      <Filter>Media</Filter>
+    </ClInclude>
+    <ClInclude Include="RecordConsumer.h">
+      <Filter>Storage</Filter>
+    </ClInclude>
+    <ClInclude Include="DiskMgr.h">
+      <Filter>Storage</Filter>
+    </ClInclude>
+    <ClInclude Include="Block.h">
+      <Filter>Storage</Filter>
+    </ClInclude>
+    <ClInclude Include="RecordJob.h">
+      <Filter>Storage</Filter>
+    </ClInclude>
+    <ClInclude Include="RecordProducer.h">
+      <Filter>Storage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\Allocator.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\AsyncFile.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\File.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\FramePtr.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\MetaDataPtr.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\Path.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\Queue.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\Thread.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\ThreadPool.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\Utility.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\UUID.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpLiveStreamServer.h">
+      <Filter>Media</Filter>
+    </ClInclude>
+    <ClInclude Include="IOThreadPool.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="TcpStreamServer.h">
+      <Filter>Media</Filter>
+    </ClInclude>
+    <ClInclude Include="TCPServer.h">
+      <Filter>Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -117,29 +195,92 @@
     <ClCompile Include="Engine.cpp">
       <Filter>Base</Filter>
     </ClCompile>
-    <ClCompile Include="Queue.cpp">
-      <Filter>Common</Filter>
-    </ClCompile>
-    <ClCompile Include="FramePtr.cpp">
-      <Filter>Common</Filter>
-    </ClCompile>
-    <ClCompile Include="MetaDataPtr.cpp">
-      <Filter>Common</Filter>
-    </ClCompile>
     <ClCompile Include="MediaSession.cpp">
       <Filter>Media</Filter>
     </ClCompile>
     <ClCompile Include="Archieve.cpp">
       <Filter>Storage</Filter>
     </ClCompile>
-    <ClCompile Include="Allocator.cpp">
-      <Filter>Common</Filter>
-    </ClCompile>
     <ClCompile Include="Decoder.cpp">
       <Filter>Codec</Filter>
     </ClCompile>
     <ClCompile Include="Encoder.cpp">
       <Filter>Codec</Filter>
+    </ClCompile>
+    <ClCompile Include="Database.cpp">
+      <Filter>Database</Filter>
+    </ClCompile>
+    <ClCompile Include="StreamProcducer.cpp">
+      <Filter>Media</Filter>
+    </ClCompile>
+    <ClCompile Include="Plugin.cpp">
+      <Filter>Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="DolphinWebService.cpp">
+      <Filter>Web</Filter>
+    </ClCompile>
+    <ClCompile Include="Playlist.cpp">
+      <Filter>Media</Filter>
+    </ClCompile>
+    <ClCompile Include="RecordConsumer.cpp">
+      <Filter>Storage</Filter>
+    </ClCompile>
+    <ClCompile Include="DiskMgr.cpp">
+      <Filter>Storage</Filter>
+    </ClCompile>
+    <ClCompile Include="Block.cpp">
+      <Filter>Storage</Filter>
+    </ClCompile>
+    <ClCompile Include="RecordJob.cpp">
+      <Filter>Storage</Filter>
+    </ClCompile>
+    <ClCompile Include="RecordProducer.cpp">
+      <Filter>Storage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\Allocator.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\AsyncFile.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\File.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\FramePtr.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\MetaDataPtr.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\Path.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\Queue.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\Thread.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\ThreadPool.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\Utility.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\UUID.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="HttpLiveStreamServer.cpp">
+      <Filter>Media</Filter>
+    </ClCompile>
+    <ClCompile Include="IOThreadPool.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="TcpStreamServer.cpp">
+      <Filter>Media</Filter>
+    </ClCompile>
+    <ClCompile Include="TCPServer.cpp">
+      <Filter>Common</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

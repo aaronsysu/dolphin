@@ -1,11 +1,12 @@
 #include "stdafx.h"
 #include "PluginMgr.h"
+#include <string>
 
 
 namespace dolphin_plug
 {
 	PluginMgr::PluginMgr()
-		: plugConfigFilePath("config.ini")
+		: _plugConfigFilePath("config.ini")
 	{
 	}
 
@@ -16,11 +17,16 @@ namespace dolphin_plug
 
 	void PluginMgr::LoadPlugs()
 	{
-
+		Plugin plugin;
+		plugin.Init();
+		_plugins["RTSP"] = plugin;
 	}
 
 	void PluginMgr::UnloadPlugs()
 	{
-
+		for (auto it : _plugins)
+		{
+			it.second.UnInit();
+		}
 	}
 }

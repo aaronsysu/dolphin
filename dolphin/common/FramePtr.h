@@ -19,18 +19,20 @@ namespace dolphin_common
 	class Frame
 	{
 	public:
-		Frame();
+		Frame(unsigned char* buffer, unsigned int bufferSize);
 		~Frame();
-		void* GetFrameBuf();
-		void* GetFrameSize();
+		unsigned char* GetFrameBuf(){ return _buffer; }
+		unsigned int GetFrameSize(){ return _bufferSize; }
 		frame_type GetFrameType();
 		encode_type GetEncodeType();
+		bool IsKeyFrame(){ return _isKeyFrame; }
 		typedef std::shared_ptr<Frame> Ptr;
 	private:
 		unsigned char*	_buffer;
 		unsigned int	_bufferSize;
 		unsigned char*  _metaData;
 		unsigned int	_metaSize;
+		bool			_isKeyFrame;
 		int				_width;
 		int				_length;
 		frame_type		_frameType;

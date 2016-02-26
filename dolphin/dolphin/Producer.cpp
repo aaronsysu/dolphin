@@ -3,7 +3,8 @@
 
 namespace dolphin_base
 {
-	Producer::Producer(){
+	Producer::Producer(std::string param)
+	:_param(param){
 	}
 
 
@@ -15,6 +16,18 @@ namespace dolphin_base
 		std::unique_lock<std::mutex> autolock(_consumerMutex);
 		for (auto &it : _consumers){
 			it->PushFrame(frame);
+		}
+	}
+
+	void Producer::Start()
+	{
+
+	}
+
+	void Producer::Stop()
+	{
+		for (auto &it : _consumers){
+			it->Stop();
 		}
 	}
 }

@@ -1,9 +1,12 @@
 #include "stdafx.h"
 #include "Consumer.h"
+#include "Engine.h"
 
 namespace dolphin_base
 {
-	Consumer::Consumer(){
+	Consumer::Consumer(std::string param)
+		: _param(param)
+		, _stopFlag(false){
 	}
 
 
@@ -12,27 +15,52 @@ namespace dolphin_base
 
 	void Consumer::PushFrame(dolphin_common::Frame::Ptr frame)
 	{
-		dolphin_common::QueueElementPtr elem = dolphin_common::QueueElement::CreateNewElem();
-		elem->SetObj(frame.get());
+		auto elem =	dolphin_common::QueueElement<dolphin_common::Frame::Ptr>::CreateNewElem();
+		elem->SetObj(frame);
 		_blockingQueue.EnQueue(elem);
 	}
 
 	dolphin_common::Frame::Ptr Consumer::PopFrame(){
-		dolphin_common::QueueElementPtr elem = _blockingQueue.DeQueueBlocking(10);
+		std::shared_ptr<dolphin_common::QueueElement<dolphin_common::Frame::Ptr>> elem =
+			_blockingQueue.DeQueueBlocking(10);
 		if (elem == nullptr){
 			return nullptr;
 		}
-		dolphin_common::Frame::Ptr frame = std::make_shared<dolphin_common::Frame>();
-		frame.reset(reinterpret_cast<dolphin_common::Frame*>(elem->GetObj()));
-
+		dolphin_common::Frame::Ptr frame = (dolphin_common::Frame::Ptr)elem->GetObj();
 		return frame;
 	}
 
 	void Consumer::RunCircle(){
-		dolphin_common::Frame::Ptr frame = PopFrame();
-		if (frame == nullptr){
+		if (_stopFlag)
+		{
+			_stopEvent.notify_all();
 			return;
 		}
-		ProcFrame(frame);
+
+		do 
+		{
+			dolphin_common::Frame::Ptr frame = PopFrame();
+			if (frame == nullptr){
+				break;
+			}
+			ProcessFrame(frame);
+		} while (0);
+
+		Engine::Get()->PostTask([this](void* param){
+			RunCircle();
+		});
+	}
+
+	void Consumer::Start()
+	{
+		RunCircle();
+	}
+
+	void Consumer::Stop()
+	{
+		_stopFlag = true;
+		
+		std::unique_lock<std::mutex> autolock(_stopMutex);
+		_stopEvent.wait(autolock);
 	}
 }

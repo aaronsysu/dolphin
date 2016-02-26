@@ -24,5 +24,27 @@ namespace dolphin.eye
         {
             InitializeComponent();
         }
+
+        private void btnPlay_Click(object sender, RoutedEventArgs e)
+        {
+            videoDisplay.Source = new Uri("C:/Users/Public/Videos/Sample Videos/Wildlife.wmv");
+            videoDisplay.Play();
+        }
+
+        private void btnPause_Click(object sender, RoutedEventArgs e)
+        {
+            if (videoDisplay.HasVideo)
+            {
+                videoDisplay.Pause();
+            }
+        }
+
+        private void btnStop_Click(object sender, RoutedEventArgs e)
+        {
+            if (videoDisplay.HasVideo)
+            {
+                videoDisplay.Stop();
+            }
+        }
     }
 }
