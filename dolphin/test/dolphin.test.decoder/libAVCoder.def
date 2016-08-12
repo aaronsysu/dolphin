@@ -1,0 +1,7 @@
+LIBRARY
+EXPORTS
+
+	AvCode_Init
+	AvCode_UnInit
+	AvCode_Start
+	AVCode_Stop
